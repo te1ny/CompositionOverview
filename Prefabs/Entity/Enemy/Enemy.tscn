@@ -1,0 +1,51 @@
+[gd_scene load_steps=9 format=3 uid="uid://jiidwyd2xh8a"]
+
+[ext_resource type="PackedScene" uid="uid://ddmjrqdrn62xf" path="res://Managers/EnemyManager.tscn" id="1_phtja"]
+[ext_resource type="PackedScene" uid="uid://dkwmsiogua2dq" path="res://Components/HealthComponent.tscn" id="2_u6kbc"]
+[ext_resource type="PackedScene" uid="uid://dp1xqdfytpdqs" path="res://Components/MovementComponent.tscn" id="3_g6ajs"]
+[ext_resource type="PackedScene" uid="uid://ci6dn44diy7ep" path="res://Components/AttackComponent.tscn" id="4_50sdp"]
+[ext_resource type="PackedScene" uid="uid://8ojdstavmg2m" path="res://Components/HitboxComponent.tscn" id="5_8uh63"]
+[ext_resource type="Texture2D" uid="uid://c600qqclapai4" path="res://icon.svg" id="6_w4d78"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_of1qw"]
+size = Vector2(150, 150)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h866l"]
+size = Vector2(128, 128)
+
+[node name="Enemy" type="CharacterBody2D"]
+collision_layer = 32
+collision_mask = 16
+motion_mode = 1
+
+[node name="EnemyManager" parent="." instance=ExtResource("1_phtja")]
+
+[node name="HealthComponent" parent="." instance=ExtResource("2_u6kbc")]
+Max_Health = 10.0
+
+[node name="MovementComponent" parent="." instance=ExtResource("3_g6ajs")]
+Speed = 200.0
+
+[node name="AttackComponent" parent="." instance=ExtResource("4_50sdp")]
+collision_layer = 4
+collision_mask = 2
+Damage = 5.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackComponent"]
+shape = SubResource("RectangleShape2D_of1qw")
+debug_color = Color(0.756863, 0.168627, 0.25098, 0.407843)
+
+[node name="HitboxComponent" parent="." instance=ExtResource("5_8uh63")]
+collision_layer = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+shape = SubResource("RectangleShape2D_h866l")
+debug_color = Color(0, 0.490196, 0.572549, 0.407843)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_h866l")
+debug_color = Color(0, 0.6, 0.701961, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1, 0.403922, 0.384314, 1)
+texture = ExtResource("6_w4d78")

@@ -1,0 +1,7 @@
+res://Scene/Place.tscn
+res://Prefabs/Entity/Player/Player.tscn
+res://Prefabs/Entity/Enemy/Enemy.tscn
+res://Managers/Scripts/PlayerManager.gd
+res://Components/Scripts/HealthComponent.gd
+res://Managers/Scripts/EnemyManager.gd
+res://Components/Scripts/AttackComponent.gd

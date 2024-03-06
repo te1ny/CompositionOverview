@@ -1,0 +1,51 @@
+[gd_scene load_steps=9 format=3 uid="uid://c1adq7cxiifmw"]
+
+[ext_resource type="PackedScene" uid="uid://c0o2ljx4taams" path="res://Managers/PlayerManager.tscn" id="1_6e18t"]
+[ext_resource type="PackedScene" uid="uid://dkwmsiogua2dq" path="res://Components/HealthComponent.tscn" id="2_wr0wq"]
+[ext_resource type="PackedScene" uid="uid://dp1xqdfytpdqs" path="res://Components/MovementComponent.tscn" id="3_5pa08"]
+[ext_resource type="PackedScene" uid="uid://ci6dn44diy7ep" path="res://Components/AttackComponent.tscn" id="4_ad8g1"]
+[ext_resource type="PackedScene" uid="uid://8ojdstavmg2m" path="res://Components/HitboxComponent.tscn" id="5_xgfe6"]
+[ext_resource type="Texture2D" uid="uid://c600qqclapai4" path="res://icon.svg" id="6_jkdfl"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_puoal"]
+size = Vector2(150, 150)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ntoft"]
+size = Vector2(128, 128)
+
+[node name="Player" type="CharacterBody2D"]
+collision_layer = 16
+collision_mask = 32
+motion_mode = 1
+
+[node name="PlayerManager" parent="." instance=ExtResource("1_6e18t")]
+position = Vector2(-16, 0)
+
+[node name="HealthComponent" parent="." instance=ExtResource("2_wr0wq")]
+Max_Health = 10.0
+
+[node name="MovementComponent" parent="." instance=ExtResource("3_5pa08")]
+Speed = 500.0
+
+[node name="AttackComponent" parent="." instance=ExtResource("4_ad8g1")]
+collision_mask = 8
+Damage = 5.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackComponent"]
+shape = SubResource("RectangleShape2D_puoal")
+debug_color = Color(0.756863, 0.168627, 0.25098, 0.407843)
+
+[node name="HitboxComponent" parent="." instance=ExtResource("5_xgfe6")]
+collision_layer = 2
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+shape = SubResource("RectangleShape2D_ntoft")
+debug_color = Color(0, 0.490196, 0.572549, 0.407843)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_ntoft")
+debug_color = Color(0, 0.6, 0.701961, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("6_jkdfl")
